@@ -52,7 +52,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -88,8 +88,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  result.$cache = function (cache) {
 	    var ref = cache || ea.globals;
-	    var cacheMap = ref.cacheMap;
-	    var cacheStack = ref.cacheStack;
+	    var cacheMap = ref.cacheMap,
+	        cacheStack = ref.cacheStack;
+	
 	
 	    if (!cache) {
 	      return { cacheMap: cacheMap, cacheStack: cacheStack };
@@ -106,9 +107,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	module.exports.ElegantApi = ElegantApi;
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
@@ -216,7 +217,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @return {Object|Array|Number|String|Boolean}
 	 */
 	function deepClone(obj) {
-	  var result = undefined;
+	  var result = void 0;
 	  if (isObject(obj)) {
 	    result = {};
 	  } else if (Array.isArray(obj)) {
@@ -258,7 +259,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (typeof args[0] === 'boolean') deep = args.shift();
 	
 	  var src = args.shift() || {},
-	      target = undefined;
+	      target = void 0;
 	
 	  for (var i = 0; i < args.length; i++) {
 	    target = args[i];
@@ -301,7 +302,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _serialize(params, obj, scope) {
 	  var array = isArray(obj),
 	      plain = isObject(obj),
-	      hash = undefined;
+	      hash = void 0;
 	
 	  each(obj, function (value, key) {
 	    hash = isObject(value) || isArray(value);
@@ -339,9 +340,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return (parts[0] + '&' + query).replace(/[&?]{1,2}/, '?') + (parts.length === 2 ? '#' + parts[1] : '');
 	}
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -364,7 +365,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var util = __webpack_require__(1);
 	var mockResponse = __webpack_require__(7);
 	
-	var STORAGE = undefined;
+	var STORAGE = void 0;
 	try {
 	  // IE 8 下直接调用 window.localStorage 会报错
 	  localStorage.setItem('_ea', '_ea');
@@ -388,19 +389,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	/**
 	 * @class ElegantApi
 	 */
-	module.exports = (function () {
+	module.exports = function () {
 	  function ElegantApi(options, mockOptions) {
 	    var _this = this;
 	
 	    _classCallCheck(this, ElegantApi);
 	
-	    var rootOptions = util.extend(true, {}, _defaultOptions2["default"], options);
+	    var rootOptions = util.extend(true, {}, _defaultOptions2['default'], options);
 	
-	    var _rootOptions = rootOptions;
-	    var globals = _rootOptions.globals;
-	    var routes = _rootOptions.routes;
-	    var resources = _rootOptions.resources;
-	    var mocks = _rootOptions.mocks;
+	    var _rootOptions = rootOptions,
+	        globals = _rootOptions.globals,
+	        routes = _rootOptions.routes,
+	        resources = _rootOptions.resources,
+	        mocks = _rootOptions.mocks;
 	
 	    delete rootOptions.globals;
 	    delete rootOptions.routes;
@@ -438,6 +439,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  // 下面几个以 _apply 全是 _transform 相关的函数
 	
+	
 	  ElegantApi.prototype._apply = function _apply(source, config, type) {
 	    var _this2 = this;
 	
@@ -473,6 +475,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  // 不需要返回，obj 是引用
+	
 	
 	  ElegantApi.prototype._requestResource = function _requestResource(obj, resource) {
 	    var removes = [];
@@ -543,7 +546,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (typeof config === 'string') config = { 'case': config };
 	    if (!util.isObject(config)) return source;
 	    config.naming = config['case'];
-	    return (0, _namingTransform2["default"])(source, config);
+	    return (0, _namingTransform2['default'])(source, config);
 	  };
 	
 	  /**
@@ -553,6 +556,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {Function}
 	   * @private
 	   */
+	
 	
 	  ElegantApi.prototype._cache = function _cache(route, cb) {
 	    var _this4 = this;
@@ -576,14 +580,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @param  {String|Array} routeNames
 	   */
 	
+	
 	  ElegantApi.prototype.removeCache = function removeCache(routeNames) {
 	    var _this5 = this;
 	
 	    if (!routeNames) return false;
 	
-	    var _globals = this.globals;
-	    var cacheMap = _globals.cacheMap;
-	    var cacheStack = _globals.cacheStack;
+	    var _globals = this.globals,
+	        cacheMap = _globals.cacheMap,
+	        cacheStack = _globals.cacheStack;
 	
 	    var keys = [].concat(routeNames);
 	
@@ -597,15 +602,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  ElegantApi.prototype._getCache = function _getCache(route) {
-	    var _globals2 = this.globals;
-	    var cacheMap = _globals2.cacheMap;
-	    var cacheStack = _globals2.cacheStack;
-	    var name = route.name;
-	    var http = route.http;var key = undefined;
+	    var _globals2 = this.globals,
+	        cacheMap = _globals2.cacheMap,
+	        cacheStack = _globals2.cacheStack;
+	    var name = route.name,
+	        http = route.http,
+	        key = void 0;
+	
 	
 	    var exists = false,
 	        value = null,
-	        data = undefined;
+	        data = void 0;
 	
 	    if (name in cacheMap) {
 	      cacheMap = cacheMap[name];
@@ -635,12 +642,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  ElegantApi.prototype._setCache = function _setCache(route, value) {
-	    var _globals3 = this.globals;
-	    var cacheSize = _globals3.cacheSize;
-	    var cacheMap = _globals3.cacheMap;
-	    var cacheStack = _globals3.cacheStack;
-	    var name = route.name;
-	    var http = route.http;
+	    var _globals3 = this.globals,
+	        cacheSize = _globals3.cacheSize,
+	        cacheMap = _globals3.cacheMap,
+	        cacheStack = _globals3.cacheStack;
+	    var name = route.name,
+	        http = route.http;
+	
 	
 	    var ref = cacheMap[name] || {},
 	        key = JSON.stringify([http.params, util.omit(http.query, ['__ea', '__eaData']), http.data]);
@@ -654,10 +662,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	    cacheStack.push([name, key]);
 	
 	    if (cacheSize > 0 && cacheStack.length > cacheSize) {
-	      var _cacheStack$shift = cacheStack.shift();
-	
-	      var n = _cacheStack$shift[0];
-	      var k = _cacheStack$shift[1];
+	      var _cacheStack$shift = cacheStack.shift(),
+	          n = _cacheStack$shift[0],
+	          k = _cacheStack$shift[1];
 	
 	      cacheMap[n] && delete cacheMap[n][k];
 	    }
@@ -670,6 +677,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @return {Function}
 	   * @private
 	   */
+	
 	
 	  ElegantApi.prototype._transform = function _transform(route, cb) {
 	    var _this6 = this;
@@ -696,10 +704,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * @private
 	   */
 	
+	
 	  ElegantApi.prototype._emulate = function _emulate(route) {
-	    var mock = route.mock;
-	    var http = route.http;
-	    var name = route.name;
+	    var mock = route.mock,
+	        http = route.http,
+	        name = route.name;
+	
 	
 	    var qs = util.buildQuery(http.query);
 	    http.url = util.appendQuery(http.path, qs);
@@ -729,7 +739,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var _this7 = this;
 	
 	    return function (userArgs, userRoute, cb) {
-	      var route = undefined;
+	      var route = void 0;
 	      // 返回的是一个全新的 route，其中 route.http.{path, params, query, data} 都是计算后的
 	      try {
 	        route = (0, _Formater.formatRealtimeRoute)(initRoute, userArgs, userRoute);
@@ -737,10 +747,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return cb(e);
 	      }
 	
-	      var _route = route;
-	      var mock = _route.mock;
-	      var http = _route.http;
-	      var dataTransformMethod = _route.dataTransformMethod;
+	      var _route = route,
+	          mock = _route.mock,
+	          http = _route.http,
+	          dataTransformMethod = _route.dataTransformMethod;
 	
 	      cb = _this7._transform(route, cb);
 	
@@ -780,14 +790,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  ElegantApi.prototype._response = function _response(route, transformData, cb) {
 	    var _this8 = this;
 	
-	    var mock = route.mock;
-	    var http = route.http;
+	    var mock = route.mock,
+	        http = route.http;
+	
 	
 	    debug(mock.debug, 'EA:(response) route: %o, transformData %o', route, transformData);
 	
 	    var memoryHandle = function memoryHandle() {
 	      mockResponse(_this8.mocks, route.name, transformData, function (error, data) {
-	        route.handle({ http: http, error: error, data: data }, cb);
+	        route.handle({ http: http }, cb);
 	      });
 	    };
 	
@@ -815,14 +826,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (false) {
 	      search = route.__search || ''; // only for test
 	    } else if (!util.isServer) {
-	        search = location.search.slice(1);
-	      }
+	      search = location.search.slice(1);
+	    }
 	
 	    search.split('&').reduce(function (ea, pair) {
-	      var _pair$split$map = pair.split('=').map(decodeURIComponent);
-	
-	      var key = _pair$split$map[0];
-	      var value = _pair$split$map[1];
+	      var _pair$split$map = pair.split('=').map(decodeURIComponent),
+	          key = _pair$split$map[0],
+	          value = _pair$split$map[1];
 	
 	      if (key !== prefix && key.indexOf(prefix) === 0) ea[key.substr(prefix.length)] = value;
 	      return ea;
@@ -874,6 +884,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  // 应该废弃?  可以使用 Promise.then
 	
+	
 	  ElegantApi.prototype._batchSeriesRequest = function _batchSeriesRequest(arr, conf, config, callback) {
 	    var _this10 = this;
 	
@@ -882,7 +893,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var lastError = null,
 	        lastData = null;
 	    var iterator = conf.iterator /* istanbul ignore next */ || util.emptyFunction;
-	    var iteratorResult = undefined;
+	    var iteratorResult = void 0;
 	
 	    var next = function next() {
 	      var key = arr[index++];
@@ -904,6 +915,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  // 应该废弃？ 可以使用 Promise.all
+	
 	
 	  ElegantApi.prototype._batchParallelRequest = function _batchParallelRequest(obj, conf, config, callback) {
 	    var _this11 = this;
@@ -930,8 +942,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          /* istanbul ignore next */
 	          if (err.message) errMap.message = err.message; // 和 single request 一致，方便统一处理错误
 	        } else {
-	            dataMap[key] = data;
-	          }
+	          dataMap[key] = data;
+	        }
 	
 	        if (!len) {
 	          callback(hasError ? errMap : null, dataMap);
@@ -941,7 +953,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	
 	  return ElegantApi;
-	})();
+	}();
 	
 	/**
 	 * 遍历指定的规则，主要用在 _applyAlias 和 _applyComputed 中
@@ -993,27 +1005,30 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	}
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
 	exports.__esModule = true;
 	
 	exports['default'] = function (source) {
-	  var _ref = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+	      _ref$deep = _ref.deep,
+	      deep = _ref$deep === undefined ? 0 : _ref$deep,
+	      _ref$naming = _ref.naming,
+	      naming = _ref$naming === undefined ? 'camel' : _ref$naming,
+	      _ref$stringify = _ref.stringify,
+	      stringify = _ref$stringify === undefined ? false : _ref$stringify;
 	
-	  var _ref$deep = _ref.deep;
-	  var deep = _ref$deep === undefined ? 0 : _ref$deep;
-	  var _ref$naming = _ref.naming;
-	  var naming = _ref$naming === undefined ? 'camel' : _ref$naming;
-	
-	  if (typeof source === 'string') {
+	  if (stringify && typeof source === 'string') {
 	    return transform(source, naming, deep, null);
 	  }
 	  return walk(source, deep, naming);
 	};
+	
+	exports.transform = transform;
 	
 	/** Used to match words to create compound words. */
 	var reWords = function () {
@@ -1034,9 +1049,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return result + word.charAt(0)[fn]() + word.slice(1);
 	    });
 	  },
-	  cap: function cap(str) {
+	
+	  capCamel: function capCamel(str) {
 	    return wrap(str, function (result, word, index) {
 	      return result + word.charAt(0).toUpperCase() + word.slice(1);
+	    });
+	  },
+	  upper: function upper(str) {
+	    return wrap(str, function (result, word, index) {
+	      return result + (index ? '_' : '') + word.toUpperCase();
 	    });
 	  },
 	  kebab: function kebab(str) {
@@ -1050,15 +1071,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    });
 	  }
 	};
+	transformers.cap = transformers.capCamel; // 为了向后兼容
 	
-	var camel = transformers.camel;
-	var cap = transformers.cap;
-	var kebab = transformers.kebab;
-	var snake = transformers.snake;
+	var camel = transformers.camel,
+	    cap = transformers.cap,
+	    kebab = transformers.kebab,
+	    snake = transformers.snake,
+	    capCamel = transformers.capCamel,
+	    upper = transformers.upper;
 	exports.camel = camel;
 	exports.cap = cap;
 	exports.kebab = kebab;
 	exports.snake = snake;
+	exports.capCamel = capCamel;
+	exports.upper = upper;
 	
 	/**
 	 *
@@ -1118,14 +1144,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return getType(target) === 'object';
 	}
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 	
 	exports.__esModule = true;
-	exports["default"] = {
+	exports['default'] = {
 	  debug: false, // 开启调试模式
 	  base: '', // 指定基准路径，这样在单独的 route 中只要指定不同的部分即可
 	  path: '',
@@ -1148,8 +1174,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    // 需要指定 memory 为 false，另外其值可以指定为 'self'，表示使用当前域名)
 	    server: null,
 	    proxy: null, // 指定代理的服务器（不推荐使用，需要 memory 为 false)
-	    delay: { min: 200, max: 1000 } // 或者指定为一个具体的数字
-	  },
+	    delay: { min: 200, max: 1000 // 或者指定为一个具体的数字
+	    } },
 	  dataTransformMethod: 'query', // query/cookie  cookie 只能用在没有独立的 mock server 的情况下，因为 cookie 无法跨域
 	
 	  // 这里的设置不会被单独的 route 覆盖
@@ -1204,6 +1230,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    throw new Error('Need implement handler function in options');
 	  },
 	
+	
 	  mocks: {
 	    /* 全局默认的 mock
 	    $default: {
@@ -1217,9 +1244,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  routes: {}
 	};
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
@@ -1279,13 +1306,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	}
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	exports.__esModule = true;
+	
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	
 	exports.formatRootOptions = formatRootOptions;
 	exports.formatInitialRoute = formatInitialRoute;
 	exports.encodeUserData = encodeUserData;
@@ -1293,9 +1323,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.formatRealtimeRoute = formatRealtimeRoute;
 	exports.formatResource = formatResource;
 	exports.reverseResource = reverseResource;
-	
-	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
-	
 	var util = __webpack_require__(1);
 	
 	/**
@@ -1363,13 +1390,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (typeof target !== 'string') return {};
 	
 	  return target.split('&').reduce(function (result, qs) {
-	    var _qs$split$map = qs.split('=').map(decodeURIComponent);
-	
-	    var key = _qs$split$map[0];
-	    var val = _qs$split$map[1];
+	    var _qs$split$map = qs.split('=').map(decodeURIComponent),
+	        key = _qs$split$map[0],
+	        val = _qs$split$map[1];
 	
 	    var conf = {},
-	        alias = undefined;
+	        alias = void 0;
 	
 	    if (val && val[0] === ':' && val[1]) alias = val.slice(1);else if (val) conf.value = val;
 	
@@ -1434,7 +1460,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	function formatRouteCacheOption(route) {
 	  var cache = route.cache,
-	      enable = undefined,
+	      enable = void 0,
 	      expireSeconds = 0;
 	
 	  if (!util.isObject(cache)) {
@@ -1668,13 +1694,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if ('cache' in userRoute) route.cache = formatRouteCacheOption(userRoute); // cache 也直接覆盖
 	  if ('debug' in userRoute) route.mock.debug = userRoute.debug;
 	
-	  var _parseUserArgs = parseUserArgs(userArgs, route);
-	
-	  var params = _parseUserArgs.params;
-	  var query = _parseUserArgs.query;
-	  var data = _parseUserArgs.data;
+	  var _parseUserArgs = parseUserArgs(userArgs, route),
+	      params = _parseUserArgs.params,
+	      query = _parseUserArgs.query,
+	      data = _parseUserArgs.data;
 	
 	  // 保证 query 是字符串
+	
 	
 	  util.each(query, function (val, key, query) {
 	    return query[key] = String(val);
@@ -1727,11 +1753,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var definition = resource[key],
 	        definitionType = typeof definition === 'undefined' ? 'undefined' : _typeof(definition);
 	
-	    var type = undefined,
-	        alias = undefined,
-	        defaultValue = undefined,
-	        read = undefined,
-	        write = undefined;
+	    var type = void 0,
+	        alias = void 0,
+	        defaultValue = void 0,
+	        read = void 0,
+	        write = void 0;
 	
 	    if (definitionType === 'string') {
 	      alias = definition;
@@ -1771,11 +1797,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var result = {};
 	
 	  util.each(resource, function (config, key) {
-	    var type = config.type;
-	    var alias = config.alias;
-	    var defaultValue = config.defaultValue;
-	    var read = config.read;
-	    var write = config.write;
+	    var type = config.type,
+	        alias = config.alias,
+	        defaultValue = config.defaultValue,
+	        read = config.read,
+	        write = config.write;
 	
 	    if (alias) {
 	      ;
@@ -1792,9 +1818,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return result;
 	}
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = function (mocks, key, transformData, callback) {
 	  var mockTarget;
@@ -1813,7 +1839,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
