@@ -373,7 +373,7 @@ module.exports = class ElegantApi {
 
     let memoryHandle = () => {
       mockResponse(this.mocks, route.name, transformData, (error, data) => {
-        route.handle({http, error, data}, cb);
+        route.handle({http}, cb);
       });
     };
 
